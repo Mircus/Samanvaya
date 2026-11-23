@@ -1,0 +1,26 @@
+SAMANVAYA v0.1 — provenance, attribution, status
+Date: 2026-11-23
+
+SAMANVAYA is developed as a new architecture building on previous HUAP work:
+https://github.com/Mircus/HUAP
+HUAP original licensing: MIT, copyright (c) 2025 HUAP Team.
+
+Repository reviewed: HUAP main, tree SHA
+41f8548c9b6c38814bf4634df44b4f92748304b0
+
+Retained at the level of design: JSONL tracing, semantic trace diff,
+side-effect-free replay, explicit contracts, CLI testability, framework-neutral
+instrumentation, bounded tool capabilities and human review gates.
+
+Fresh in this baseline: five-pillar constitutional policy, typed mandates,
+restricted delegation, revocation, collective hyperedges and quorum, action
+purpose, fail-closed decision statuses, and governance test cases.
+
+No HUAP source modules are vendored verbatim in this baseline. The compatibility
+reader consumes HUAP v0.1 JSONL as untrusted historical data only. The new
+trace schema is intentionally distinct: samanvaya.audit.v0.1.
+
+Philosophical inspirations: Sanskrit terms Ṛta, Dharma, Adhikāra,
+Samanvaya, Punarnavīkaraṇa and Lokasaṃgraha; technical interpretation is
+independent of scripture. The 12-law mapping is a provisional interpretation
+of the public series by Srinivas Gutta, not a reproduction or endorsement.

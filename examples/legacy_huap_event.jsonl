@@ -1,0 +1,1 @@
+{"v":"0.1","ts":"2026-01-01T00:00:00+00:00","run_id":"run_legacy","span_id":"sp_1","kind":"tool","name":"tool_call","pod":"sample","engine":"native_graph","data":{"tool":"example","input":{}}}
