@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/samanvaya-logo.png" alt="Samanvaya — indigo and emerald emblem" width="560">
+</p>
+
 # SAMANVAYA
 
 **An executable constitution for accountable AI agent collectives.**
