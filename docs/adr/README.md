@@ -8,3 +8,5 @@ ADRs are stable architectural constraints, not aspirational feature lists.
 - [ADR-0004](0004-prototype-trust-limits.md): no production security claims before authentication and broker isolation.
 
 Revisions require tests and explicit rationale. Never silently change a normative ADR because a demo becomes inconvenient.
+
+- [ADR-0005 — Plan coherence and finite-catalog repair](0005-coherence-repair-not-another-agent-runtime.md)

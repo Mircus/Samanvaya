@@ -10,11 +10,40 @@
 
 > Intelligence may be distributed. Responsibility cannot disappear.
 
-**Status: v0.1 experimental foundation (23 November 2026). Not production-secure.**
+**Status: v0.2 experimental research baseline (24 November 2026). Not production-secure.**
 
 Samanvaya is a small, standard-library Python constitutional kernel. It borrows HUAP's useful trace-first philosophy—replay, diff, explicit contracts, evaluation-oriented testing—while placing **legitimate authority** in front of consequential agent actions. Its objective is to become an enforceable, inspectable governance layer for agent systems, not a new LLM framework or another general-purpose UI.
 
 The five Sanskrit-derived architectural principles are design inspirations, **not claims that classical Vedic texts directly specified software requirements**. See [VEDIC_FOUNDATIONS.md](docs/VEDIC_FOUNDATIONS.md).
+
+## What is new in v0.2: constitutional coherence + finite-catalog repair
+
+**Samanvaya now tests an explicit differentiating hypothesis**: an individually authorized agent action can still be inadmissible as part of a larger plan because its facts, duties or interdependent actions are inconsistent. Instead of merely denying it, Samanvaya can search *operator-supplied, finite alternatives* for the least-cost **admissible proposed plan**, with a precise minimality claim **only inside the exhausted catalog**. No agent is authorized to fabricate evidence, issue new mandates or automatically accept a repair.
+
+- `src/samanvaya/coherence.py`: typed whole-plan `FactObligation`, `BeforeObligation`, `ExclusionObligation` and temporal evidence witnesses.
+- `src/samanvaya/repair.py`: uniform-cost bounded search over trusted replacement/drop options; `minimal_proven_within_catalog` is false if search is incomplete.
+- `src/samanvaya/adapters/broker.py`: existing gateway plus whole-plan preflight, trusted tool bindings and exact argument-digest checks.
+- `src/samanvaya/adapters/langchain_v1.py`: optional LangChain v1 `wrap_tool_call` middleware, without importing LangChain from the core.
+
+**Reproducible local demonstration** (no LLM calls or external side effects):
+
+```bash
+python -m pip install -e .
+python examples/land_community_demo.py
+python benchmarks/reference_suite.py
+python -m unittest discover -s tests -v
+```
+
+The demo shows `action=ALLOW` but `whole_plan=UNKNOWN`, so the broker blocks the tool. A trusted alternative ('survey first') is then proposed, re-evaluated and executed as a **simulation** only after operator selection.
+
+For actual LangChain integration (requires network for dependency installation; commands below use a POSIX shell):
+
+```bash
+python -m pip install -e '.[langchain]'
+SAMANVAYA_REQUIRE_LANGCHAIN=1 python -m unittest tests.test_langchain_real -v
+```
+
+**No uniqueness claim yet.** Microsoft AGT/ACS, OPA, Cedar, AGP and LangChain already provide substantial governance functionality. Read [differentiator and prior-art boundaries](docs/DIFFERENTIATOR_AND_NON_DUPLICATION.md), [integration protocol](docs/FRAMEWORK_PORTABILITY.md), and [experimental benchmark](docs/EXPERIMENT_PROTOCOL.md). The local environment did not have LangChain installed; integration contract tests passed, while a dedicated CI job is configured to run the actual framework tests upon publication.
 
 ## What works now
 
@@ -26,7 +55,7 @@ The five Sanskrit-derived architectural principles are design inspirations, **no
 - **Punarnavīkaraṇa / correction**: expiration, revocation cascades, and intent-scoped human review.
 - **Audit + replay**: chain-linked JSONL decision audit, integrity check, semantic diff, and no-side-effect re-evaluation of decisions using a fresh policy.
 - **HUAP compatibility**: read-only inspection of existing HUAP JSONL traces. Legacy traces do **not** convey authority.
-- **19 unit tests** and GitHub Actions test workflow, with no external runtime dependencies.
+- **44 collected tests** (42 passed, 2 optional live LangChain tests skipped locally); core has no external runtime dependencies.
 
 ## What does **not** work yet
 
@@ -123,6 +152,11 @@ flowchart TD
 - [SECURITY.md](docs/SECURITY.md) — actual guarantees vs threat-model gaps
 - [ROADMAP.md](docs/ROADMAP.md) — subsequent engineering milestones
 - [HANDOFF_FOR_CLAUDE_CODEX.md](docs/HANDOFF_FOR_CLAUDE_CODEX.md) — task brief and acceptance gates
+- [DIFFERENTIATOR_AND_NON_DUPLICATION.md](docs/DIFFERENTIATOR_AND_NON_DUPLICATION.md) — prior-art audit, research hypothesis and stop/go test
+- [FRAMEWORK_PORTABILITY.md](docs/FRAMEWORK_PORTABILITY.md) — LangChain 1.x integration and no-bypass requirements
+- [EXPERIMENT_PROTOCOL.md](docs/EXPERIMENT_PROTOCOL.md) — benchmark and finite-catalog proof conditions
+- [VALIDATION_REPORT.md](docs/VALIDATION_REPORT.md) — tests actually executed vs pending
+- [CLAUDE_CODEX_V02_HANDOFF.md](docs/CLAUDE_CODEX_V02_HANDOFF.md) — v0.2 next steps
 - [ADRs](docs/adr/README.md) — permanent architecture choices
 
 ## Origins, rights and acknowledgements
@@ -132,3 +166,7 @@ This codebase is a **clean small kernel with explicit conceptual lineage**, not 
 Conceptual dialogue: Srinivas Gutta's **Twelve Laws of Agentic AI**, especially articles 8 (accountability), 10 (non-delegable authority), and 12 (governability). The law matrix is expressly **provisional** pending an article-by-article verified audit and does not claim to reproduce his actual texts.
 
 MIT license. Early baseline maintained as a **starting point for Claude/Codex refinement**, not as a deployed platform.
+
+## v0.2 next engineering steps
+
+Use [`docs/CLAUDE_CODEX_V02_HANDOFF.md`](docs/CLAUDE_CODEX_V02_HANDOFF.md) rather than adding more generic governance features. The previous v0.1 handoff remains as architectural and security background. Authenticating evidence/principals and demonstrating a non-bypassable tool service are prerequisites before production use.

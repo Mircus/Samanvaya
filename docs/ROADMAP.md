@@ -1,3 +1,9 @@
+> **2026-11-24 note:** v0.2 now contains experimental whole-plan coherence,
+> finite-catalog repair, a generic tool broker, and an optional sync LangChain
+> middleware. The security milestones below **remain incomplete**; v0.2's
+> existence must not be confused with production-grade enforcement. See
+> `DIFFERENTIATOR_AND_NON_DUPLICATION.md` and `CLAUDE_CODEX_V02_HANDOFF.md`.
+
 # Roadmap: evidence-driven, bounded engineering
 
 ## v0.1 — Baseline (this archive)

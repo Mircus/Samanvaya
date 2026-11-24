@@ -1,9 +1,9 @@
-name: Python tests
+name: Samanvaya tests
 on:
   push:
   pull_request:
 jobs:
-  tests:
+  core:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,3 +17,14 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python -m samanvaya demo --audit /tmp/samanvaya-ci.jsonl
       - run: python -m samanvaya verify-audit /tmp/samanvaya-ci.jsonl
+      - run: python examples/land_community_demo.py
+      - run: python benchmarks/reference_suite.py
+  langchain-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[langchain]'
+      - run: SAMANVAYA_REQUIRE_LANGCHAIN=1 python -m unittest tests.test_langchain_real -v

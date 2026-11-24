@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "samanvaya"
-version = "0.1.0"
+version = "0.2.0"
 description = "An experimental constitutional kernel for governed agent collectives"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -15,6 +15,7 @@ classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
+langchain = ["langchain>=1.0,<2.0", "langchain-core>=1.0,<2.0"]
 
 [project.scripts]
 samanvaya = "samanvaya.cli:main"

@@ -1,3 +1,11 @@
+> **v0.2 extension:** the original diagram below describes the action-level
+> policy path. A new **plan-time** `CoherenceAnalyzer` checks obligations across
+> steps, and a `MinimalRepairExplorer` explores trusted alternatives. The
+> `ConstitutionalToolBroker` rechecks whole-plan coherence and exact argument
+> digests before invoking the existing gateway. This is a cooperative host
+> adapter, not a cryptographic or isolated security boundary. See
+> `FRAMEWORK_PORTABILITY.md` and `EXPERIMENT_PROTOCOL.md`.
+
 # Architecture: constitutional control plane, not another agent platform
 
 ## Goal and scope

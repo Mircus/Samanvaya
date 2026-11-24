@@ -90,6 +90,19 @@ class MandateBook:
             self._mandates[mandate.mandate_id] = mandate
             self._use_count[mandate.mandate_id] = 0
 
+    def planning_snapshot(self) -> "MandateBook":
+        """Detached, in-memory policy state for reproducible *planning* only.
+
+        Do not use this snapshot to authorize side effects. A live gateway must
+        re-evaluate using the original ledger immediately before its operation.
+        """
+        with self.lock:
+            cloned = MandateBook(tuple(sorted(self.root_issuers)))
+            cloned._mandates = self._mandates.copy()
+            cloned._revoked = self._revoked.copy()
+            cloned._use_count = self._use_count.copy()
+            return cloned
+
     def get(self, mandate_id: str) -> Mandate | None:
         with self.lock:
             return self._mandates.get(mandate_id)
