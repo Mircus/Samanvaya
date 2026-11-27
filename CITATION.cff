@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use Samanvaya in research, please cite the project and reference revision."
+title: "Samanvaya: An Executable Constitution for Agentic Intelligence"
+type: software
+authors:
+  - name: "Samanvaya Project (HoloMathics LLC)"
+version: 0.2.0
+date-released: 2026-11-24
+url: "https://github.com/Mircus/Samanvaya"
+repository-code: "https://github.com/Mircus/Samanvaya"
+license: MIT
+keywords:
+  - agentic AI
+  - constitutional governance
+  - plan coherence
+  - constructive repair
+  - multi-agent systems
